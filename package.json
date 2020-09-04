@@ -8,6 +8,8 @@
   "scripts": {
     "dev": "webpack-dev-server --config configTools/webpack.config.ts --propgress --dev",
     "pro": "webpack-dev-server --config configTools/webpack.config.ts --propgress --pro",
+    "uat": "webpack-dev-server --config configTools/webpack.config.ts --propgress --uat",
+    "qa": "webpack-dev-server --config configTools/webpack.config.ts --propgress --qa",
     "build": "webpack --config configTools/webpack.config.ts --progress"
   },
   "browserslist": [

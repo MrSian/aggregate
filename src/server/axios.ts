@@ -8,19 +8,23 @@ const service = axios.create({
 // 请求拦截器
 service.interceptors.request.use(function (config) {
   // 在请求发送之前做一些处理
-  // let user = store.state.user
-  // if (user && user.token) {
-  //   // 设置请求头的字段Authorization
-  //   config.headers['Authorization'] = user.token
-  // }
+  let user = {
+    token: null,
+    tenantId: null,
+    appId: null
+  }
+  if (user && user.token) {
+    // 设置请求头的字段Authorization
+    config.headers['Authorization'] = user.token
+  }
   // 附加参数
-  // let attachParams = user ? { appId: user.appId, tenantId: user.tenantId } : {}
+  let attachParams = user ? { appId: user.appId, tenantId: user.tenantId } : {}
   // 添加请求参数
   switch (config.method) {
     case 'get':
     case 'delete':
       config.params = {
-        // ...attachParams,
+        ...attachParams,
         ...config.params
       }
       break
@@ -30,7 +34,7 @@ service.interceptors.request.use(function (config) {
         break
       }
       config.data = {
-        // ...attachParams,
+        ...attachParams,
         ...config.data
       }
       break
