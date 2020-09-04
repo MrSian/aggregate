@@ -154,6 +154,7 @@ const webpackConfig: webpack.Configuration = {
     historyApiFallback: { // 应对返回404页面时定向到特定页面
       // rewrites: [{ from: /./, to: '/404.html' }]
     },
+    open: true, // 是否自动打开默认浏览器
     hot: true, // 启动热加载
     hotOnly: true, // 启动热加载
     watchOptions: { // 自定义的监听模式，用来监听文件是否被改动过。
