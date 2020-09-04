@@ -1,8 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '~/components/App';
-import logo from '../assets/images/no_data@2x.png'
+import React from 'react'
 import style from './index.scss'
+import ReactDOM from 'react-dom'
+import App from '~/components/App'
+import Result from '~/mock/Result'
+import Home from '~/containers/home'
+import logo from '../assets/images/no_data@2x.png'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
 function render() {
   return ReactDOM.render(
@@ -11,6 +14,12 @@ function render() {
         <p>Hello, react + red11ux</p>
         <img src={logo} className={style.logo} alt="logo" />
       </section>
+      <Router>
+        <Switch>
+          <Route exact={true} path="/" component={Home}></Route>
+          <Route path="/result" component={Result}></Route>
+        </Switch>
+      </Router>
     </App>
     ,
     document.getElementById('sakura-container')
