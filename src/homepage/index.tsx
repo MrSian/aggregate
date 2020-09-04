@@ -13,7 +13,7 @@ function render() {
       </section>
     </App>
     ,
-    document.getElementById('tcl-container')
+    document.getElementById('sakura-container')
   );
 }
 

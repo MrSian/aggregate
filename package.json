@@ -6,7 +6,8 @@
   "author": "MrSian",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --config configTools/webpack.config.ts --propgress --dev",
+    "dev": "webpack-dev-server --config configTools/webpack.config.ts --propgress --dev",
+    "pro": "webpack-dev-server --config configTools/webpack.config.ts --propgress --pro",
     "build": "webpack --config configTools/webpack.config.ts --progress"
   },
   "browserslist": [
