@@ -1,0 +1,21 @@
+@import 'public.scss';
+
+.container{
+  color: $blue;
+  font-size: $base-font-size;
+  display: flex;
+  .logo{
+    height: 40vmin;
+    pointer-events: none;
+    animation: login-spin infinite 20s linear;
+  }
+}
+
+@keyframes logo-spin{
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

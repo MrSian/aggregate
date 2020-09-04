@@ -1,0 +1,112 @@
+{
+
+  "compilerOptions": {
+    /*访问https://aka.ms/tsconfig.json阅读有关此文件的更多信息*/
+    /*基本选项*/
+    //"incremental":true,/*启用增量编译*/
+    "target": "ES2015",
+    /*指定ECMAScript目标版本:"ES3"（默认）、"es5"、"ES2015"、"ES2016"、"ES2017"、"ES2018"、"ES2019"、"ES2020"或"ESNEXT"。*/
+    "module": "commonjs",
+    /*指定模块代码生成:"none"、"commonjs"、"amd"、"system"、"umd"、"es2015"、"es2020"或"ESNext"。*/
+    //"lib":[],/*指定要包含在编译中的库文件。*/
+    //"allowJs":true,/*允许编译javascript文件。*/
+    //"checkJs":true,/*报告.js文件中的错误。*/
+    "jsx": "preserve",
+    /*指定jsx代码生成:"preserve"、"react native"或"react"。*/
+    "jsxFactory": "React.createElement",
+    /*指定生成目标为react jsx时，使用jsx工厂函数*/
+    //"declaration":true,/*生成相应的".d.ts"文件。*/
+    //"declarationMap":true,/*为每个对应的".d.ts"文件生成一个源映射。*/
+    "sourceMap": true,
+    /*生成相应的".map"文件。*/
+    //"outFile":"./",/*连接并将输出发送到单个文件。*/
+    //"outDir":"./",/*将输出结构重定向到目录。*/
+    //"rootDir":"./",/*指定输入文件的根目录。用于使用--outDir控制输出目录结构。*/
+    //"composite":true,/*启用项目编译*/
+    //"tsBuildInfoFile":"./",/*指定用于存储增量编译信息的文件*/
+    //"removeComments":true,/*不向输出发出注释。*/
+    //"noEmit":true,/*不发射输出。*/
+    //"importHelpers":true,/*从"tslib"导入emit helpers。*/
+    //"downlevelditeration":true,/*在以"ES5"或"ES3"为目标时,提供对"for of"、spread和destructuring中的iterables的完全支持。*/
+    //"isolatedModules":true,/*将每个文件作为单独的模块进行传输（类似于'传输模块'). */
+    "resolveJsonModule": true,
+
+    /*严格的类型检查选项*/
+    "strict": true,
+    /*启用所有严格类型检查选项。*/
+    //"和"truenoimplicy"类型的声明。*/
+    //"strictNullChecks":true,/*启用严格的空检查。*/
+    //"strictFunctionTypes":true,/*启用函数类型的严格检查。*/
+
+    //"strictBindCallApply":true,/*对函数启用严格的"bind"、"call"和"apply"方法。*/
+
+    //"strictPropertyInitialization":true,/*启用类中属性初始化的严格检查。*/
+
+    //"noImplicitThis":true,/*使用隐含的"any"类型对"this"表达式引发错误。*/
+
+    //"alwaysStrict":true,/*在strict模式下解析,并为每个源文件发出"use strict"。*/
+
+
+
+    /*附加支票*/
+
+    "noUnusedLocals": false,
+    /*报告未使用的局部变量的错误。*/
+
+    "noUnusedParameters": false,
+    /*报告未使用参数的错误。*/
+
+    //"noImplicitReturns":true,/*在函数中并非所有代码路径都返回值时报告错误。*/
+
+    //"noFallthroughCasesInSwitch":true,/*在switch语句中报告错误。*/
+
+
+
+    /*模块分辨率选项*/
+
+    "moduleResolution": "node",
+    /*指定模块解析策略:"node"(节点.js)或"经典"（TypeScript 1.6之前的版本）。*/
+
+    "baseUrl": "src",
+    /*用于解析非绝对模块名称的基目录。*/
+
+    "paths": {
+      "~/*": ["*"]
+    },
+    /*一系列条目,它们将导入重新映射到相对于"baseUrl"的查找位置。*/
+
+    //"rootDirs":[],/*根文件夹的列表,其组合内容表示运行时项目的结构。*/
+
+    "typeRoots": ["node_modules/@types", "types"], /*要从中包含类型定义的文件夹列表。*/
+
+    //"types":[],/*要包含在编译中的类型声明文件。*/
+
+    "allowSyntheticDefaultImports": true,
+    /*允许从没有默认导出的模块中进行默认导入。这不会影响代码的发出,只会影响类型检查。*/
+
+    "esModuleInterop": true,
+    /*通过为所有导入创建命名空间对象来实现CommonJS和ES模块之间的互操作性。意味着"allowSyntheticDefaultImports"。*/
+
+    //"preserveSymlinks":true,/*不解析符号链接的实际路径。*/
+
+    //"allowUmdGlobalAccess":true,/*允许从模块访问UMD全局参数。*/
+
+    /* Source Map Options */
+    // "sourceRoot": "",                      /* Specify the location where debugger should locate TypeScript files instead of source locations. */
+    // "mapRoot": "",                         /* Specify the location where debugger should locate map files instead of generated locations. */
+    // "inlineSourceMap": true,               /* Emit a single file with source maps instead of having a separate file. */
+    // "inlineSources": true,                 /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
+
+    /* Experimental Options */
+    "experimentalDecorators": false,
+    /* Enables experimental support for ES7 decorators. */
+    "emitDecoratorMetadata": false,
+    /* Enables experimental support for emitting type metadata for decorators. */
+
+    /* 高级选项 */
+    "skipLibCheck": false,
+    /* 跳过声明文件的类型检查. */
+    "forceConsistentCasingInFileNames": false /* 不允许对同一文件进行大小写不一致的引用. */
+  },
+  "exclude": ["node_modules"] // 这个目录下的代码不会被 typescript 处理
+}

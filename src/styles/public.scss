@@ -1,0 +1,10 @@
+$base-font-size: 12px !default;
+$green: green;
+$blue: blue;
+$red: red;
+
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

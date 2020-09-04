@@ -1,0 +1,4 @@
+{
+  "presets": ["es2015", "react"]
+}
+// 使用 TypeScript 编译 .ts(x) 文件 - 输出 ES2015。然后，我们使用 Babel 将它降级到 ES5。
