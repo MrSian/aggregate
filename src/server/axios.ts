@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+console.log(process)
 const service = axios.create({
   baseURL: process.env.REACT_APP_API_BASE,
   timeout: 60 * 1000
@@ -9,9 +9,9 @@ const service = axios.create({
 service.interceptors.request.use(function (config) {
   // 在请求发送之前做一些处理
   let user = {
-    token: null,
-    tenantId: null,
-    appId: null
+    token: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJuaWNrbmFtZSI6IuWwj-exsyIsImV4cCI6MTU5OTI3MTUxNywidXNlcklkIjoyLCJpYXQiOjE1OTkxODUxMTd9.uc5xBdEbuxLXzubRlPLG4Em8pco7_0s_Rz8FhtR8Mtm6OumUqaK7CKKciOg97wvYQVnlkPpBsApa3CJkbovTaQ',
+    tenantId: 1,
+    appId: 1
   }
   if (user && user.token) {
     // 设置请求头的字段Authorization

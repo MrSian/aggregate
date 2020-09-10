@@ -1,13 +1,23 @@
 import webpack from 'webpack';
 import * as paths from './paths.config'
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import proxyTargetMap from '../configCore/env.json'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const Dotenv = require('dotenv-webpack') // 引用了 .env 文件配置的变量直接替换成对应的值
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin') // 优化构建时命令行的显示日志
-const isDev = process.argv.includes('--dev') // 是否属于开发环境
+let target: any = process.env['API_TYPE']
+let proxyTarget = getTargetValue(target).BASEURL
+// let publicPath = process.env.NODE_ENV === 'production' ? '/' : '/'
+const noPro = ['tcl', 'qa', 'uat', 'dev'].includes(target) // 是否处以开发环境、测试环境、uat、tcl环境(不是生产环境)
+
+function getTargetValue(target: keyof typeof proxyTargetMap) {
+  return proxyTargetMap[target]
+}
 
 const webpackConfig: webpack.Configuration = {
-  mode: isDev ? 'development' : 'production', // 开发环境 || 生产环境
-  devtool: isDev ? 'cheap-eval-source-map' : 'cheap-module-source-map', // 生成资源映射,迅速定位到错误位置，
+  mode: noPro ? 'development' : 'production', // 开发环境 || 生产环境
+  devtool: noPro ? 'cheap-eval-source-map' : 'cheap-module-source-map', // 生成资源映射,迅速定位到错误位置，
   entry: {
     main: ['react-hot-loader/patch', './src/homepage/index.tsx'],
   },
@@ -54,7 +64,7 @@ const webpackConfig: webpack.Configuration = {
             options: {
               compilerOptions: {
                 module: 'esNext', // for Tree-shaking
-                sourceMap: isDev,
+                sourceMap: noPro,
               },
             },
           },
@@ -64,24 +74,22 @@ const webpackConfig: webpack.Configuration = {
       {
         test: /\.(css|scss)$/,
         use: [
-          isDev ? 'style-loader' :
+          noPro ? 'style-loader' :
             {
               loader: MiniCssExtractPlugin.loader,
               options: {
                 publicPath: '../',
               },
             },
-
           {
             loader: 'cache-loader',
           },
-
           {
             loader: 'css-loader',
             options: {
-              sourceMap: isDev ? true : false, // 启用/禁用 Sourcemap
-              modules:{
-                localIdentName: isDev ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]', // 配置生成的标识符
+              sourceMap: noPro ? true : false, // 启用/禁用 Sourcemap
+              modules: {
+                localIdentName: noPro ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]', // 配置生成的标识符
               },
               importLoaders: 2, // 在css-loader前应用的loader数量
             }
@@ -89,7 +97,7 @@ const webpackConfig: webpack.Configuration = {
           {
             loader: 'sass-loader',
             options: {
-              sourceMap: isDev ? true : false, // 启用/禁用 Sourcemap
+              sourceMap: noPro ? true : false, // 启用/禁用 Sourcemap
               sassOptions: {
                 includePaths: [paths.STYLES_DIR],
               }
@@ -101,7 +109,7 @@ const webpackConfig: webpack.Configuration = {
               plugins: [require('autoprefixer')],
             }
           }
-        ]
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/,
@@ -143,10 +151,21 @@ const webpackConfig: webpack.Configuration = {
       },
       hash: true
     }),
+    // 清除之前的dll文件
+    new CleanWebpackPlugin(),
+    // 设置环境变量
+    new Dotenv(),
+    // 设置环境变量
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //       NODE_ENV: 'production'
+    //   }
+    // }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
   devServer: {
+    // publicPath: publicPath,
     port: 8585, // 端口号
     host: 'localhost', // 主机号
     contentBase: paths.BUILD_DIR,
@@ -161,7 +180,16 @@ const webpackConfig: webpack.Configuration = {
       aggregateTimeout: 300, // 添加一个延迟。填以毫秒为单位的数字。
       poll: false, // 填以毫秒为单位的数字。每隔（你设定的）多少时间查一下有没有文件改动过。不想启用也可以填false
       ignored: /node_modules/, // 忽略文件夹
-    }
+    },
+    proxy: {
+      '/api': {
+        target: proxyTarget,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
   }
 };
 

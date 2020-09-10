@@ -6,10 +6,10 @@
   "author": "MrSian",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --config configTools/webpack.config.ts --propgress --dev",
-    "pro": "webpack-dev-server --config configTools/webpack.config.ts --propgress --pro",
-    "uat": "webpack-dev-server --config configTools/webpack.config.ts --propgress --uat",
-    "qa": "webpack-dev-server --config configTools/webpack.config.ts --propgress --qa",
+    "dev": "cross-env API_TYPE=dev webpack-dev-server --config configTools/webpack.config.ts --propgress --dev",
+    "pro": "cross-env API_TYPE=pro webpack-dev-server --config configTools/webpack.config.ts --propgress --pro",
+    "uat": "cross-env API_TYPE=uat webpack-dev-server --config configTools/webpack.config.ts --propgress --uat",
+    "qa": "cross-env API_TYPE=qa webpack-dev-server --config configTools/webpack.config.ts --propgress --qa",
     "build": "webpack --config configTools/webpack.config.ts --progress"
   },
   "browserslist": [
@@ -37,7 +37,10 @@
     "axios": "^0.20.0",
     "babel-loader": "^8.1.0",
     "cache-loader": "^4.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
     "css-loader": "^4.2.2",
+    "dotenv-webpack": "^2.0.0",
     "file-loader": "^6.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "html-webpack-plugin": "^4.4.1",
@@ -55,7 +58,8 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "yargs-parser": "^19.0.4"
   },
   "dependencies": {
     "react": "^16.13.1",
